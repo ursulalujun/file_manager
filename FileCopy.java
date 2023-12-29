@@ -1,18 +1,14 @@
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
 
-
-public class FileCopy {	
+public class FileCopy {
     public void copy(String srcPath,String dstPath) throws IOException {
         try {
             File file=new File(srcPath);
             if(file.isDirectory()){
                 FileCopyUtils.copyDir(srcPath,dstPath);
             }
-            else {            	
+            else {
                 File f=new File(dstPath);
                 if(!f.exists()){
                     f.createNewFile();
@@ -24,22 +20,22 @@ public class FileCopy {
         }
     }
     
-    public void diycopy(String srcPath,String dstPath) throws IOException{
-    	try {
-    		File file = new File(srcPath);
-    		if(file.isDirectory()) {
-    			FileDiyCopy.copyDiyDir(srcPath,dstPath);
-    		}
-    		else {
-    			File f = new File(dstPath);
-    			if(!f.exists()) {
-    				f.createNewFile();
-    			}
-    			FileDiyCopy.copyFile(srcPath,dstPath);
-    		}
-    	}catch(IOException e) {
-    		e.printStackTrace();
-    	}
+    public void diycopy(String srcPath,String dstPath) throws IOException {
+        try {
+            File file=new File(srcPath);
+            if(file.isDirectory()){
+                FileDiyCopy.copyDiyDir(srcPath,dstPath);
+            }
+            else {
+                File f=new File(dstPath);
+                if(!f.exists()){
+                    f.createNewFile();
+                }
+                FileDiyCopy.copyFile(srcPath,dstPath);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void compress(String srcPath,String dstPath){
