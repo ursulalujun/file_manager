@@ -4,7 +4,7 @@ public class FileEncrypyUtils {
 //    在复制目录的过程中判断源文件下所有文件对象是否为目录，是的话则利用递归调用自己复制目录
 //    如果是文件的话，则调用encrypy方法加密文件
 
-    public static void search(String srcPath,String destPath,int key) throws IOException {
+    public static void decrypyDir(String srcPath,String destPath,int key) throws IOException {
         File src = new File(srcPath);//源头
         File dest = new File(destPath);//目的地
         //判断是否为目录，不存在则不作操作
@@ -23,9 +23,9 @@ public class FileEncrypyUtils {
                 //如果是目录的话
                 if (aSrcList.isDirectory()) {
                     //递归调用遍历该目录
-                    search(srcPath + File.separator + aSrcList.getName(), destPath + File.separator + aSrcList.getName(),key);
+                    decrypyDir(srcPath + File.separator + aSrcList.getName(), destPath + File.separator + aSrcList.getName(),key);
                 } else if (aSrcList.isFile()) {
-                    encrypy(srcPath + File.separator + aSrcList.getName(), destPath + File.separator + aSrcList.getName(),key);
+                    decrypy(srcPath + File.separator + aSrcList.getName(), destPath + File.separator + aSrcList.getName(),key);
                 }
             }
         }
@@ -33,7 +33,7 @@ public class FileEncrypyUtils {
 
 
     //    实现对文件的复制
-    public static void encrypy(String isFile, String osFile, int key) throws IOException {
+    public static void encrypy(String isFile, String osFile, int key){
         BufferedInputStream is = null;
         BufferedOutputStream os = null;
         try {
@@ -50,7 +50,7 @@ public class FileEncrypyUtils {
                 os.write(data, 0, len);
             }
 
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }finally {
             //	释放资源 分别关闭 先打开的后关闭
